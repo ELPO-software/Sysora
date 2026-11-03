@@ -9,10 +9,12 @@
     NavigationCacheMode="Required">
 
     <Page.Resources>
-        <Style x:Key="ColumnHeaderButtonStyle" TargetType="Button" BasedOn="{StaticResource SubtleButtonStyle}">
+        <Style x:Key="ColumnHeaderButtonStyle" TargetType="Button" BasedOn="{StaticResource SysoraSubtleButtonStyle}">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="4,4" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
 
         <DataTemplate x:Key="TopItemTemplate" x:DataType="vm:TopProcessItemViewModel">
@@ -21,16 +23,16 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Spacing="6">
+                <StackPanel Orientation="Horizontal" Spacing="8">
                     <TextBlock MaxWidth="170" Text="{x:Bind Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
                     <TextBlock VerticalAlignment="Center" Style="{StaticResource LabelTextStyle}" Text="{x:Bind InstancesText, Mode=OneWay}" />
                 </StackPanel>
-                <TextBlock Grid.Column="1" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind PrimaryText, Mode=OneWay}" />
+                <TextBlock Grid.Column="1" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind PrimaryText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
-    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="32,24,32,24" RowSpacing="12">
+    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource FillPagePadding}" RowSpacing="12">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Wide">
@@ -86,34 +88,34 @@
                 AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}"
                 Command="{x:Bind ViewModel.RefreshCommand}"
                 ToolTipService.ToolTip="{x:Bind l:UiStrings.Common_RefreshNow}">
-                <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
             </Button>
         </Grid>
 
         <!-- Top consumers -->
         <controls:AdaptiveGridPanel Grid.Row="1" MinItemWidth="260">
-            <Border Style="{StaticResource CardStyle}" Padding="16,12">
+            <Border Style="{StaticResource CardStyle}" Padding="{StaticResource CompactCardPadding}">
                 <StackPanel Spacing="4">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Foreground="{ThemeResource CpuAccentBrush}" Glyph="&#xE950;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Foreground="{ThemeResource CpuAccentBrush}" Glyph="&#xE950;" />
                         <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Processes_HIGHESTCPUUSAGE}" />
                     </StackPanel>
                     <ItemsControl ItemTemplate="{StaticResource TopItemTemplate}" ItemsSource="{x:Bind ViewModel.TopCpu}" />
                 </StackPanel>
             </Border>
-            <Border Style="{StaticResource CardStyle}" Padding="16,12">
+            <Border Style="{StaticResource CardStyle}" Padding="{StaticResource CompactCardPadding}">
                 <StackPanel Spacing="4">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Foreground="{ThemeResource MemoryAccentBrush}" Glyph="&#xE964;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Foreground="{ThemeResource MemoryAccentBrush}" Glyph="&#xE964;" />
                         <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Processes_HIGHESTMEMORYUSAGE}" />
                     </StackPanel>
                     <ItemsControl ItemTemplate="{StaticResource TopItemTemplate}" ItemsSource="{x:Bind ViewModel.TopMemory}" />
                 </StackPanel>
             </Border>
-            <Border Style="{StaticResource CardStyle}" Padding="16,12">
+            <Border Style="{StaticResource CardStyle}" Padding="{StaticResource CompactCardPadding}">
                 <StackPanel Spacing="4">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Foreground="{ThemeResource DiskAccentBrush}" Glyph="&#xEDA2;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Foreground="{ThemeResource DiskAccentBrush}" Glyph="&#xEDA2;" />
                         <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Processes_HIGHESTIOACTIVITY}" />
                     </StackPanel>
                     <ItemsControl ItemTemplate="{StaticResource TopItemTemplate}" ItemsSource="{x:Bind ViewModel.TopIo}" />
@@ -148,7 +150,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Column headers (click to sort) -->
-                    <Grid Padding="12,6,28,6" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="0,0,0,1">
+                    <Grid Padding="12,8,28,8" Style="{StaticResource TableHeaderStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="72" />
@@ -159,30 +161,30 @@
                         <Button AutomationProperties.Name="{x:Bind l:UiStrings.Processes_SortByName}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Name" HorizontalContentAlignment="Left" Style="{StaticResource ColumnHeaderButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="4">
                                 <TextBlock Text="{x:Bind l:UiStrings.Processes_Name}" />
-                                <FontIcon FontSize="10" Glyph="{x:Bind ViewModel.NameSortGlyph, Mode=OneWay}" />
+                                <FontIcon Style="{StaticResource SortIconStyle}" Glyph="{x:Bind ViewModel.NameSortGlyph, Mode=OneWay}" />
                             </StackPanel>
                         </Button>
                         <Button Grid.Column="1" AutomationProperties.Name="{x:Bind l:UiStrings.Processes_SortByPID}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Pid" HorizontalContentAlignment="Right" Style="{StaticResource ColumnHeaderButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <FontIcon FontSize="10" Glyph="{x:Bind ViewModel.PidSortGlyph, Mode=OneWay}" />
+                                <FontIcon Style="{StaticResource SortIconStyle}" Glyph="{x:Bind ViewModel.PidSortGlyph, Mode=OneWay}" />
                                 <TextBlock Text="{x:Bind l:UiStrings.Processes_PID}" />
                             </StackPanel>
                         </Button>
                         <Button Grid.Column="2" AutomationProperties.Name="{x:Bind l:UiStrings.Processes_SortByCPU}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Cpu" HorizontalContentAlignment="Right" Style="{StaticResource ColumnHeaderButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <FontIcon FontSize="10" Glyph="{x:Bind ViewModel.CpuSortGlyph, Mode=OneWay}" />
+                                <FontIcon Style="{StaticResource SortIconStyle}" Glyph="{x:Bind ViewModel.CpuSortGlyph, Mode=OneWay}" />
                                 <TextBlock Text="{x:Bind l:UiStrings.Common_CPU}" />
                             </StackPanel>
                         </Button>
                         <Button Grid.Column="3" AutomationProperties.Name="{x:Bind l:UiStrings.Processes_SortByMemory}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Memory" HorizontalContentAlignment="Right" Style="{StaticResource ColumnHeaderButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Processes_PrivateWorkingSetPhysicalMemoryUsedOnlyByThis}">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <FontIcon FontSize="10" Glyph="{x:Bind ViewModel.MemorySortGlyph, Mode=OneWay}" />
+                                <FontIcon Style="{StaticResource SortIconStyle}" Glyph="{x:Bind ViewModel.MemorySortGlyph, Mode=OneWay}" />
                                 <TextBlock Text="{x:Bind l:UiStrings.Common_Memory}" />
                             </StackPanel>
                         </Button>
                         <Button Grid.Column="4" AutomationProperties.Name="{x:Bind l:UiStrings.Processes_SortByDiskIO}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Io" HorizontalContentAlignment="Right" Style="{StaticResource ColumnHeaderButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Processes_ReadAndWriteIOFilesDevicesAndNetwork}">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <FontIcon FontSize="10" Glyph="{x:Bind ViewModel.IoSortGlyph, Mode=OneWay}" />
+                                <FontIcon Style="{StaticResource SortIconStyle}" Glyph="{x:Bind ViewModel.IoSortGlyph, Mode=OneWay}" />
                                 <TextBlock Text="{x:Bind l:UiStrings.Common_DiskIO}" />
                             </StackPanel>
                         </Button>
@@ -212,10 +214,10 @@
                                         <ColumnDefinition Width="112" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock VerticalAlignment="Center" Text="{x:Bind Item.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
-                                    <TextBlock Grid.Column="1" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind Item.PidText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="2" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.CpuText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="3" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.MemoryText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="4" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.IoText, Mode=OneWay}" />
+                                    <TextBlock Grid.Column="1" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind Item.PidText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="2" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.CpuText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="3" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.MemoryText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="4" Padding="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind Item.IoText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -242,7 +244,7 @@
                         Style="{StaticResource SecondaryTextStyle}"
                         Text="{x:Bind l:UiStrings.Processes_SelectAProcessToSeeItsDetails}"
                         Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
-                    <ScrollViewer Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
+                    <ScrollViewer controls:Motion.RevealOnShow="True" Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
                         <StackPanel Spacing="12" Padding="0,0,8,0">
                             <StackPanel Spacing="2">
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.Details.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
@@ -274,7 +276,7 @@
                             </controls:AdaptiveGridPanel>
                             <Button Command="{x:Bind ViewModel.EndProcessCommand}">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <FontIcon FontSize="14" Glyph="&#xE711;" />
+                                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE711;" />
                                     <TextBlock Text="{x:Bind l:UiStrings.Processes_EndProcess}" />
                                 </StackPanel>
                             </Button>

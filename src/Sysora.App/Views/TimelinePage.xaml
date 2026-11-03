@@ -35,7 +35,7 @@
                 SelectedIndex="{x:Bind ViewModel.RangeIndex, Mode=TwoWay}" />
             <DropDownButton Grid.Column="2" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Common_Show}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <FontIcon FontSize="14" Glyph="&#xE71C;" />
+                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE71C;" />
                     <TextBlock Text="{x:Bind l:UiStrings.Common_Show}" />
                 </StackPanel>
                 <DropDownButton.Flyout>
@@ -49,17 +49,17 @@
                             <CheckBox Content="{x:Bind l:UiStrings.Timeline_SleepNetworkAndDevices}" IsChecked="{x:Bind ViewModel.ShowSystem, Mode=TwoWay}" />
                             <CheckBox Content="{x:Bind l:UiStrings.Timeline_TroubleshootingInvestigations}" IsChecked="{x:Bind ViewModel.ShowInvestigations, Mode=TwoWay}" />
                             <CheckBox Content="{x:Bind l:UiStrings.Timeline_SysorasOwnEventsMonitoringStartedGaps}" IsChecked="{x:Bind ViewModel.ShowMonitoring, Mode=TwoWay}" />
-                            <ToggleSwitch Margin="0,6,0,0" Header="{x:Bind l:UiStrings.Timeline_Order}" IsOn="{x:Bind ViewModel.NewestFirst, Mode=TwoWay}" OffContent="{x:Bind l:UiStrings.Timeline_OldestFirst}" OnContent="{x:Bind l:UiStrings.Timeline_NewestFirst}" />
+                            <ToggleSwitch Margin="0,8,0,0" Header="{x:Bind l:UiStrings.Timeline_Order}" IsOn="{x:Bind ViewModel.NewestFirst, Mode=TwoWay}" OffContent="{x:Bind l:UiStrings.Timeline_OldestFirst}" OnContent="{x:Bind l:UiStrings.Timeline_NewestFirst}" />
                         </StackPanel>
                     </Flyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
             <Button Grid.Column="3" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}" Command="{x:Bind ViewModel.RefreshCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Common_Refresh}">
-                <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
             </Button>
             <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Grid.Column="4" VerticalAlignment="Center" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Timeline_SaveTheEntriesShownAsAnHTMLReportOrJSONData}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                     <TextBlock Text="{x:Bind l:UiStrings.Common_Export}" />
                 </StackPanel>
             </Button>
@@ -85,7 +85,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="vm:TimelineRowViewModel">
                     <Grid>
-                        <TextBlock Margin="0,16,0,6" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind HeaderText}" Visibility="{x:Bind IsHeader}" />
+                        <TextBlock Margin="0,16,0,8" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind HeaderText}" Visibility="{x:Bind IsHeader}" />
                         <Grid Padding="4,8" ColumnSpacing="12" Visibility="{x:Bind IsEntry}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="90" />
@@ -93,7 +93,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Margin="0,1,0,0" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind TimeText}" />
+                            <TextBlock Margin="0,2,0,0" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind TimeText}" />
                             <controls:StatusIcon Grid.Column="1" Margin="0,2,0,0" VerticalAlignment="Top" BrushKey="{x:Bind BrushKey}" Glyph="{x:Bind Glyph}" GlyphSize="16" />
                             <StackPanel Grid.Column="2" Spacing="2">
                                 <TextBlock Text="{x:Bind Title}" TextWrapping="Wrap" />
@@ -101,14 +101,14 @@
                                 <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind Source}" />
                             </StackPanel>
                             <StackPanel Grid.Column="3" VerticalAlignment="Top" Orientation="Horizontal" Spacing="2">
-                                <Button AutomationProperties.Name="{x:Bind l:UiStrings.Timeline_ShowThisMomentInReplay}" Command="{x:Bind ReplayCommand}" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Timeline_ShowThisMomentInReplay}" Visibility="{x:Bind IsExact}">
-                                    <FontIcon FontSize="14" Glyph="&#xE81C;" />
+                                <Button AutomationProperties.Name="{x:Bind l:UiStrings.Timeline_ShowThisMomentInReplay}" Command="{x:Bind ReplayCommand}" Style="{StaticResource SysoraSubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Timeline_ShowThisMomentInReplay}" Visibility="{x:Bind IsExact}">
+                                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE81C;" />
                                 </Button>
-                                <Button AutomationProperties.Name="{x:Bind l:UiStrings.Timeline_CompareBeforeAndAfter}" Command="{x:Bind CompareCommand}" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Timeline_CompareThe15MinutesBeforeAndAfter}" Visibility="{x:Bind IsExact}">
-                                    <FontIcon FontSize="14" Glyph="&#xE81E;" />
+                                <Button AutomationProperties.Name="{x:Bind l:UiStrings.Timeline_CompareBeforeAndAfter}" Command="{x:Bind CompareCommand}" Style="{StaticResource SysoraSubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Timeline_CompareThe15MinutesBeforeAndAfter}" Visibility="{x:Bind IsExact}">
+                                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE81E;" />
                                 </Button>
-                                <Button AutomationProperties.Name="{x:Bind ActionLabel}" Command="{x:Bind OpenCommand}" Style="{StaticResource SubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind ActionLabel}" Visibility="{x:Bind HasAction}">
-                                    <FontIcon FontSize="14" Glyph="&#xE76C;" />
+                                <Button AutomationProperties.Name="{x:Bind ActionLabel}" Command="{x:Bind OpenCommand}" Style="{StaticResource SysoraSubtleButtonStyle}" ToolTipService.ToolTip="{x:Bind ActionLabel}" Visibility="{x:Bind HasAction}">
+                                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE76C;" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -119,12 +119,11 @@
 
         <Border
             Grid.Row="2"
-            Padding="24"
-            VerticalAlignment="Top"
-            Style="{StaticResource CardStyle}"
+            controls:Motion.RevealOnShow="True"
+            Style="{StaticResource EmptyStateCardStyle}"
             Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
             <StackPanel HorizontalAlignment="Center" Spacing="8">
-                <FontIcon FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Glyph="&#xE81C;" />
+                <FontIcon Style="{StaticResource EmptyStateIconStyle}" Glyph="&#xE81C;" />
                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.Timeline_NoEntryToShow}" />
                 <TextBlock HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Timeline_ChooseALongerPeriodOrShowMoreKindsOfEntries}" TextAlignment="Center" />
             </StackPanel>

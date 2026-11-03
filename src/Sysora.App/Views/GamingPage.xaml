@@ -14,7 +14,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="32,24,32,24" RowSpacing="12">
+    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource FillPagePadding}" RowSpacing="12">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Wide">
@@ -64,7 +64,7 @@
                 AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}"
                 Command="{x:Bind ViewModel.RefreshCommand}"
                 ToolTipService.ToolTip="{x:Bind l:UiStrings.Common_RefreshNow}">
-                <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
             </Button>
         </Grid>
 
@@ -97,7 +97,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <FontIcon VerticalAlignment="Top" FontSize="28" Foreground="{ThemeResource GpuAccentBrush}" Glyph="&#xE7FC;" />
+                <FontIcon VerticalAlignment="Top" Style="{StaticResource FeatureIconStyle}" Foreground="{ThemeResource GpuAccentBrush}" Glyph="&#xE7FC;" />
                 <StackPanel Grid.Column="1" Spacing="4">
                     <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Gaming_GAMERUNNINGRECORDINGWITHMINIMALIMPACT}" />
                     <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.LiveTitle, Mode=OneWay}" TextWrapping="Wrap" />
@@ -134,7 +134,7 @@
                     SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="vm:GameSessionItemViewModel">
-                            <Grid Padding="0,8" ColumnSpacing="10">
+                            <Grid Padding="0,8" ColumnSpacing="12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -152,20 +152,20 @@
             </Border>
 
             <!-- Empty state -->
-            <Border Grid.ColumnSpan="2" Padding="24" VerticalAlignment="Top" Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+            <Border Grid.ColumnSpan="2" controls:Motion.RevealOnShow="True" Style="{StaticResource EmptyStateCardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" MaxWidth="640" Spacing="8">
-                    <FontIcon FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Glyph="&#xE7FC;" />
+                    <FontIcon Style="{StaticResource EmptyStateIconStyle}" Glyph="&#xE7FC;" />
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.Gaming_NoGameSessionYet}" />
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Gaming_StartAGameSysoraFollowsItAutomaticallyWhen}" TextAlignment="Center" />
                     <HyperlinkButton HorizontalAlignment="Center" Command="{x:Bind ViewModel.OpenSettingsCommand}" Content="{x:Bind l:UiStrings.Gaming_MarkAnApplicationAsAGameInSettings}" />
                 </StackPanel>
             </Border>
 
-            <ScrollViewer x:Name="RecapPanel" Grid.Row="1" Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
+            <ScrollViewer x:Name="RecapPanel" Grid.Row="1" controls:Motion.RevealOnShow="True" Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
                 <StackPanel Padding="0,0,12,0" Spacing="12">
                     <!-- Headline -->
                     <Border Style="{StaticResource CardStyle}">
-                        <Grid ColumnSpacing="14">
+                        <Grid ColumnSpacing="16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -181,7 +181,7 @@
                                 <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Recap.Detection, Mode=OneWay}" />
                                 <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource LabelTextStyle}" Text="{x:Bind ViewModel.Recap.ExecutablePath, Mode=OneWay}" />
                             </StackPanel>
-                            <StackPanel Grid.Column="2" VerticalAlignment="Top" Spacing="6">
+                            <StackPanel Grid.Column="2" VerticalAlignment="Top" Spacing="8">
                                 <DropDownButton HorizontalAlignment="Stretch" Content="{x:Bind l:UiStrings.Common_Compare}">
                                     <DropDownButton.Flyout>
                                         <MenuFlyout Placement="Bottom">
@@ -203,7 +203,7 @@
 
                     <!-- Measurements -->
                     <Border Style="{StaticResource CardStyle}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Common_Measurements}" />
                             <Grid Padding="0,2" ColumnSpacing="12">
                                 <Grid.ColumnDefinitions>
@@ -220,7 +220,7 @@
                             <ItemsControl ItemsSource="{x:Bind ViewModel.Recap.Metrics}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:DataType="vm:GameMetricItemViewModel">
-                                        <Grid Padding="0,3" ColumnSpacing="12" Opacity="{x:Bind Opacity}">
+                                        <Grid Padding="0,4" ColumnSpacing="12" Opacity="{x:Bind Opacity}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*" MinWidth="160" />
                                                 <ColumnDefinition Width="*" MinWidth="80" />
@@ -241,7 +241,7 @@
                     <!-- Charts -->
                     <controls:AdaptiveGridPanel MinItemWidth="320">
                         <Border Style="{StaticResource CardStyle}">
-                            <StackPanel Spacing="6">
+                            <StackPanel Spacing="8">
                                 <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Gaming_CPUDuringTheSession}" />
                                 <controls:TimeSeriesChart
                                     AutomationProperties.Name="{x:Bind l:UiStrings.Gaming_CPUDuringTheSession}"
@@ -253,7 +253,7 @@
                             </StackPanel>
                         </Border>
                         <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.Recap.HasGpuChart, Mode=OneWay}">
-                            <StackPanel Spacing="6">
+                            <StackPanel Spacing="8">
                                 <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Gaming_GPUDuringTheSession}" />
                                 <controls:TimeSeriesChart
                                     AutomationProperties.Name="{x:Bind l:UiStrings.Gaming_GPUDuringTheSession}"
@@ -273,7 +273,7 @@
                             <DataTemplate x:DataType="vm:GameFindingItemViewModel">
                                 <Expander Margin="0,0,0,8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                                     <Expander.Header>
-                                        <Grid Padding="0,10" ColumnSpacing="12">
+                                        <Grid Padding="0,12" ColumnSpacing="12">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
@@ -287,7 +287,7 @@
                                             <controls:LevelBadge Grid.Column="2" VerticalAlignment="Top" BrushKey="StatusInfoBrush" Text="{x:Bind Qualifier}" Visibility="{x:Bind HasQualifier}" />
                                         </Grid>
                                     </Expander.Header>
-                                    <StackPanel Spacing="10">
+                                    <StackPanel Spacing="12">
                                         <StackPanel Spacing="2" Visibility="{x:Bind HasRecommendation}">
                                             <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Common_WhatYouCanDo}" />
                                             <TextBlock Text="{x:Bind Recommendation}" TextWrapping="Wrap" />
@@ -321,13 +321,13 @@
 
                     <!-- Comparison -->
                     <Border Style="{StaticResource CardStyle}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Gaming_ComparedWithPreviousSessions}" />
                             <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Recap.ComparisonNote, Mode=OneWay}" />
                             <ItemsControl ItemsSource="{x:Bind ViewModel.Recap.Comparison}" Visibility="{x:Bind ViewModel.Recap.HasComparison, Mode=OneWay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:DataType="gaming:GameComparisonItem">
-                                        <Grid Padding="0,3" ColumnSpacing="12">
+                                        <Grid Padding="0,4" ColumnSpacing="12">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="2*" MinWidth="160" />
                                                 <ColumnDefinition Width="*" />
@@ -337,9 +337,9 @@
                                             <TextBlock Text="{x:Bind Metric}" TextWrapping="Wrap" />
                                             <TextBlock Grid.Column="1" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ThisSession}" />
                                             <TextBlock Grid.Column="2" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Previous}" />
-                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="6">
+                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8">
                                                 <TextBlock Text="{x:Bind Difference}" />
-                                                <FontIcon FontSize="12" Foreground="{ThemeResource StatusInfoBrush}" Glyph="&#xE946;" ToolTipService.ToolTip="{x:Bind l:UiStrings.Gaming_NotableDifference}" Visibility="{x:Bind IsNotable}" />
+                                                <FontIcon Style="{StaticResource SmallIconStyle}" Foreground="{ThemeResource StatusInfoBrush}" Glyph="&#xE946;" ToolTipService.ToolTip="{x:Bind l:UiStrings.Gaming_NotableDifference}" Visibility="{x:Bind IsNotable}" />
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
@@ -350,7 +350,7 @@
 
                     <!-- Other applications, game processes, events -->
                     <Border Style="{StaticResource CardStyle}">
-                        <StackPanel Spacing="10">
+                        <StackPanel Spacing="12">
                             <StackPanel Spacing="4">
                                 <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Gaming_OtherApplicationsDuringTheGame}" />
                                 <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Gaming_NoOtherApplicationUsedAMeasurableShareOfThe}" Visibility="{x:Bind ViewModel.Recap.HasOtherApps, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}" />

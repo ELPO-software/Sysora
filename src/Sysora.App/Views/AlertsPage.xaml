@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -21,7 +21,7 @@
                 </Grid.ColumnDefinitions>
                 <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Grid.Column="3" VerticalAlignment="Center" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Alerts_SaveTheAlertsAsAnHTMLReportOrJSONData}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Common_Export}" />
                     </StackPanel>
                 </Button>
@@ -60,7 +60,7 @@
                             HorizontalContentAlignment="Stretch"
                             IsExpanded="{x:Bind IsExpanded, Mode=TwoWay}">
                             <Expander.Header>
-                                <Grid Padding="0,10" ColumnSpacing="12">
+                                <Grid Padding="0,12" ColumnSpacing="12">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
@@ -75,7 +75,7 @@
                                     <controls:LevelBadge Grid.Column="2" VerticalAlignment="Top" BrushKey="{x:Bind StatusBrushKey, Mode=OneWay}" Text="{x:Bind StatusText, Mode=OneWay}" />
                                 </Grid>
                             </Expander.Header>
-                            <StackPanel Spacing="10">
+                            <StackPanel Spacing="12">
                                 <StackPanel Spacing="2">
                                     <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Alerts_Context}" />
                                     <TextBlock Text="{x:Bind ContextText, Mode=OneWay}" TextWrapping="Wrap" />
@@ -117,16 +117,16 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Border Padding="24" Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+            <Border controls:Motion.RevealOnShow="True" Style="{StaticResource EmptyStateCardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" Spacing="8">
-                    <FontIcon FontSize="32" Foreground="{ThemeResource StatusNormalBrush}" Glyph="&#xE73E;" />
+                    <FontIcon Style="{StaticResource EmptyStateIconStyle}" Foreground="{ThemeResource StatusNormalBrush}" Glyph="&#xE73E;" />
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.Alerts_NothingToReport}" />
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Alerts_SysoraRaisesAnAlertOnlyWhenAProblemLastsOrIs}" TextAlignment="Center" />
                 </StackPanel>
             </Border>
 
             <Border Style="{StaticResource CardStyle}">
-                <StackPanel Spacing="6">
+                <StackPanel Spacing="8">
                     <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.Alerts_ActiveRules}" />
                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.RulesText, Mode=OneWay}" />
                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Alerts_AConditionMustLastBeforeItIsReportedWhileItLasts}" />

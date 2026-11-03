@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -23,7 +23,7 @@
                 </StackPanel>
                 <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Grid.Column="1" VerticalAlignment="Center" Command="{x:Bind ViewModel.ExportCommand}" IsEnabled="{x:Bind ViewModel.HasResult, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Compare_SaveThisComparisonAsAnHTMLReportOrJSONData}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Common_Export}" />
                     </StackPanel>
                 </Button>
@@ -54,9 +54,9 @@
                         <TimePicker Header="{x:Bind l:UiStrings.Compare_Time}" Time="{x:Bind ViewModel.SecondTime, Mode=TwoWay}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Compare}" Command="{x:Bind ViewModel.CompareCommand}" Style="{StaticResource AccentButtonStyle}">
+                        <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Compare}" Command="{x:Bind ViewModel.CompareCommand}" Style="{StaticResource SysoraAccentButtonStyle}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <FontIcon FontSize="14" Glyph="&#xE81E;" />
+                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE81E;" />
                                 <TextBlock Text="{x:Bind l:UiStrings.Common_Compare}" />
                             </StackPanel>
                         </Button>
@@ -72,7 +72,7 @@
                 <StackPanel Spacing="8">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled">
                         <StackPanel MinWidth="760">
-                            <Grid Padding="0,6" ColumnSpacing="12">
+                            <Grid Padding="0,8" ColumnSpacing="12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1.6*" />
                                     <ColumnDefinition Width="*" />
@@ -89,7 +89,7 @@
                             <ItemsControl ItemsSource="{x:Bind ViewModel.Rows}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:DataType="vm:CompareRowViewModel">
-                                        <Grid Padding="0,6" ColumnSpacing="12" ToolTipService.ToolTip="{x:Bind Explanation}">
+                                        <Grid Padding="0,8" ColumnSpacing="12" ToolTipService.ToolTip="{x:Bind Explanation}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1.6*" />
                                                 <ColumnDefinition Width="*" />
@@ -100,8 +100,8 @@
                                             <TextBlock Text="{x:Bind Name}" />
                                             <TextBlock Grid.Column="1" Text="{x:Bind Before}" />
                                             <TextBlock Grid.Column="2" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind After}" />
-                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="6">
-                                                <FontIcon FontSize="12" Glyph="{x:Bind DirectionGlyph}" />
+                                            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8">
+                                                <FontIcon Style="{StaticResource SmallIconStyle}" Glyph="{x:Bind DirectionGlyph}" />
                                                 <TextBlock Text="{x:Bind Change}" TextWrapping="Wrap" />
                                             </StackPanel>
                                             <controls:LevelBadge Grid.Column="4" MinWidth="120" BrushKey="{x:Bind ImportanceBrushKey}" Text="{x:Bind ImportanceText}" />

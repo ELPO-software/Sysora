@@ -7,15 +7,7 @@
     xmlns:vm="using:Sysora.App.ViewModels"
     NavigationCacheMode="Required">
 
-    <Page.Resources>
-        <Style x:Key="ColumnHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
-            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="NoWrap" />
-        </Style>
-    </Page.Resources>
-
-    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="32,24,32,24" RowSpacing="12">
+    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource FillPagePadding}" RowSpacing="12">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Wide">
@@ -56,7 +48,7 @@
             </Grid.ColumnDefinitions>
             <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Grid.Column="3" VerticalAlignment="Center" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.AppImpact_SaveTheRankingAsAnHTMLReportOrJSONData}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Common_Export}" />
                     </StackPanel>
             </Button>
@@ -77,7 +69,7 @@
                 AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}"
                 Command="{x:Bind ViewModel.RefreshCommand}"
                 ToolTipService.ToolTip="{x:Bind l:UiStrings.Common_RefreshNow}">
-                <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
             </Button>
         </Grid>
 
@@ -105,7 +97,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Grid Padding="16,8,28,8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="0,0,0,1" ColumnSpacing="8">
+                    <Grid Padding="16,8,28,8" ColumnSpacing="8" Style="{StaticResource TableHeaderStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="24" />
                             <ColumnDefinition Width="*" MinWidth="160" />
@@ -147,25 +139,25 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind RankText, Mode=OneWay}" />
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center" ToolTipService.ToolTip="{x:Bind Location, Mode=OneWay}">
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
                                             <TextBlock MaxWidth="260" Text="{x:Bind Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
                                             <TextBlock VerticalAlignment="Center" Foreground="{ThemeResource StatusNormalBrush}" Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind l:UiStrings.AppImpact_Running2}" Visibility="{x:Bind IsRunning, Mode=OneWay}" />
                                         </StackPanel>
                                         <TextBlock MaxLines="1" Style="{StaticResource LabelTextStyle}" Text="{x:Bind Location, Mode=OneWay}" TextWrapping="NoWrap" />
                                     </StackPanel>
                                     <controls:LevelBadge Grid.Column="2" BrushKey="{x:Bind LevelBrushKey, Mode=OneWay}" Text="{x:Bind LevelText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind CpuText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind MemoryText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind DiskText, Mode=OneWay}" />
-                                    <TextBlock Grid.Column="6" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind DurationText, Mode=OneWay}" />
-                                    <FontIcon Grid.Column="7" HorizontalAlignment="Center" FontSize="12" Glyph="{x:Bind TrendGlyph, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind TrendText, Mode=OneWay}" />
+                                    <TextBlock Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind CpuText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind MemoryText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind DiskText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <TextBlock Grid.Column="6" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{x:Bind DurationText, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
+                                    <FontIcon Grid.Column="7" HorizontalAlignment="Center" Style="{StaticResource SmallIconStyle}" Glyph="{x:Bind TrendGlyph, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind TrendText, Mode=OneWay}" />
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
 
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
-                        <FontIcon FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Glyph="&#xE9D9;" />
+                        <FontIcon Style="{StaticResource EmptyStateIconStyle}" Glyph="&#xE9D9;" />
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.AppImpact_NoApplicationUsageRecordedForThisPeriodYet}" />
                     </StackPanel>
 
@@ -188,7 +180,7 @@
                         Text="{x:Bind l:UiStrings.AppImpact_SelectAnApplicationToSeeWhyItRanksThereAndIts}"
                         TextAlignment="Center"
                         Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
-                    <ScrollViewer Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
+                    <ScrollViewer controls:Motion.RevealOnShow="True" Visibility="{x:Bind ViewModel.HasSelection, Mode=OneWay}">
                         <StackPanel Padding="0,0,12,0" Spacing="12">
                             <StackPanel Spacing="4">
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.Detail.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
@@ -245,7 +237,7 @@
                                 <ItemsControl ItemsSource="{x:Bind ViewModel.Detail.Evidence}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="vm:EvidenceItemViewModel">
-                                            <StackPanel Padding="0,6" Spacing="2">
+                                            <StackPanel Padding="0,8" Spacing="2">
                                                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind Metric}" />
                                                 <TextBlock IsTextSelectionEnabled="True" Text="{x:Bind Observed}" TextWrapping="Wrap" />
                                                 <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Detail}" Visibility="{x:Bind HasDetail}" />

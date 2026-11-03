@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
 
             <Grid ColumnSpacing="16">
                 <Grid.ColumnDefinitions>
@@ -55,7 +55,7 @@
             </SelectorBar>
 
             <!-- CPU -->
-            <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsCpuSection, Mode=OneWay}">
+            <StackPanel controls:Motion.RevealOnShow="True" Spacing="12" Visibility="{x:Bind ViewModel.IsCpuSection, Mode=OneWay}">
                 <Border Style="{StaticResource CardStyle}">
                     <Grid RowSpacing="8">
                         <Grid.RowDefinitions>
@@ -118,7 +118,7 @@
                                     <StackPanel Spacing="4">
                                         <Grid>
                                             <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind Label}" />
-                                            <TextBlock HorizontalAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind Text, Mode=OneWay}" />
+                                            <TextBlock HorizontalAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind Text, Mode=OneWay}" Typography.NumeralAlignment="Tabular" />
                                         </Grid>
                                         <controls:UsageBar
                                             Foreground="{ThemeResource CpuAccentBrush}"
@@ -132,7 +132,7 @@
             </StackPanel>
 
             <!-- Memory -->
-            <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsMemorySection, Mode=OneWay}">
+            <StackPanel controls:Motion.RevealOnShow="True" Spacing="12" Visibility="{x:Bind ViewModel.IsMemorySection, Mode=OneWay}">
                 <Border Style="{StaticResource CardStyle}">
                     <Grid RowSpacing="8">
                         <Grid.RowDefinitions>
@@ -168,7 +168,7 @@
             </StackPanel>
 
             <!-- GPU -->
-            <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsGpuSection, Mode=OneWay}">
+            <StackPanel controls:Motion.RevealOnShow="True" Spacing="12" Visibility="{x:Bind ViewModel.IsGpuSection, Mode=OneWay}">
                 <InfoBar
                     IsClosable="False"
                     IsOpen="{x:Bind ViewModel.HasNoGpu, Mode=OneWay}"
@@ -210,7 +210,7 @@
             </StackPanel>
 
             <!-- Disk activity -->
-            <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsDiskSection, Mode=OneWay}">
+            <StackPanel controls:Motion.RevealOnShow="True" Spacing="12" Visibility="{x:Bind ViewModel.IsDiskSection, Mode=OneWay}">
                 <InfoBar
                     IsClosable="False"
                     IsOpen="{x:Bind ViewModel.HasNoDisk, Mode=OneWay}"
@@ -234,7 +234,7 @@
                                     </Grid.RowDefinitions>
                                     <Grid>
                                         <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind Drive, Mode=OneWay}" VerticalAlignment="Center" />
-                                        <TextBlock HorizontalAlignment="Right" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Active, Mode=OneWay}" />
+                                        <TextBlock HorizontalAlignment="Right" Style="{StaticResource CompactValueTextStyle}" Text="{x:Bind Active, Mode=OneWay}" />
                                     </Grid>
                                     <controls:TimeSeriesChart Grid.Row="1" Height="140" Data="{x:Bind Chart, Mode=OneWay}" Stroke="{ThemeResource DiskAccentBrush}" />
                                     <TextBlock Grid.Row="2" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Stats, Mode=OneWay}" />

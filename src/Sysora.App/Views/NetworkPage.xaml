@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
 
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
@@ -39,8 +39,8 @@
 
             <controls:AdaptiveGridPanel MinItemWidth="220">
                 <Border Style="{StaticResource CardStyle}">
-                    <StackPanel Spacing="6">
-                        <TextBlock CharacterSpacing="40" Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Network_CONNECTION}" />
+                    <StackPanel Spacing="8">
+                        <TextBlock Style="{StaticResource EyebrowTextStyle}" Text="{x:Bind l:UiStrings.Network_CONNECTION}" />
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <controls:HealthGlyph Status="{x:Bind ViewModel.ConnectionStatus, Mode=OneWay}" />
                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.ConnectionTitle, Mode=OneWay}" TextWrapping="Wrap" />
@@ -61,8 +61,8 @@
                     Glyph="&#xE898;"
                     Value="{x:Bind ViewModel.Upload, Mode=OneWay}" />
                 <Border Style="{StaticResource CardStyle}">
-                    <StackPanel Spacing="6">
-                        <TextBlock CharacterSpacing="40" Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Network_ACTIVEINTERFACE}" />
+                    <StackPanel Spacing="8">
+                        <TextBlock Style="{StaticResource EyebrowTextStyle}" Text="{x:Bind l:UiStrings.Network_ACTIVEINTERFACE}" />
                         <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.PrimaryName, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
                         <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.PrimaryAddress, Mode=OneWay}" />
                     </StackPanel>
@@ -78,12 +78,13 @@
                     <Grid>
                         <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Network_Throughput}" />
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="16">
-                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                <Rectangle Width="12" Height="3" VerticalAlignment="Center" Fill="{ThemeResource NetworkAccentBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Line VerticalAlignment="Center" Stroke="{ThemeResource NetworkAccentBrush}" StrokeThickness="2" X2="14" />
                                 <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Network_Download}" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                <Rectangle Width="12" Height="3" VerticalAlignment="Center" Fill="{ThemeResource NetworkSecondaryAccentBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <!-- Dashed like the upload line in the chart. -->
+                                <Line VerticalAlignment="Center" Stroke="{ThemeResource NetworkSecondaryAccentBrush}" StrokeDashArray="3,2" StrokeThickness="2" X2="14" />
                                 <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Network_Upload}" />
                             </StackPanel>
                         </StackPanel>
@@ -114,7 +115,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontSize="24" Foreground="{ThemeResource NetworkAccentBrush}" Glyph="{x:Bind Glyph, Mode=OneWay}" />
+                                    <FontIcon Style="{StaticResource FeatureIconStyle}" Foreground="{ThemeResource NetworkAccentBrush}" Glyph="{x:Bind Glyph, Mode=OneWay}" />
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind Name, Mode=OneWay}" />
                                         <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind Description, Mode=OneWay}" />

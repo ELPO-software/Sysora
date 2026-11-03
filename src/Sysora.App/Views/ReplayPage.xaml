@@ -75,10 +75,10 @@
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         Command="{x:Bind ViewModel.BackToNowCommand}"
-                        Style="{StaticResource AccentButtonStyle}"
+                        Style="{StaticResource SysoraAccentButtonStyle}"
                         Visibility="{x:Bind ViewModel.IsPaused, Mode=OneWay}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon FontSize="14" Glyph="&#xE768;" />
+                            <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE768;" />
                             <TextBlock Text="{x:Bind l:UiStrings.Replay_BackToNow}" />
                         </StackPanel>
                     </Button>
@@ -90,16 +90,16 @@
                         ItemsSource="{x:Bind ViewModel.Ranges}"
                         SelectedItem="{x:Bind ViewModel.Range, Mode=TwoWay}" />
                     <Button Grid.Column="3" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Replay_ZoomIn}" Command="{x:Bind ViewModel.ZoomInCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Replay_ZoomInShorterPeriodAroundTheCursor}">
-                        <FontIcon FontSize="14" Glyph="&#xE8A3;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE8A3;" />
                     </Button>
                     <Button Grid.Column="4" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Replay_ZoomOut}" Command="{x:Bind ViewModel.ZoomOutCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Replay_ZoomOutLongerPeriod}">
-                        <FontIcon FontSize="14" Glyph="&#xE71F;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE71F;" />
                     </Button>
                     <Button Grid.Column="5" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Replay_CompareBeforeAndAfterTheCursor}" Command="{x:Bind ViewModel.CompareAroundCursorCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Replay_CompareThe15MinutesBeforeAndAfterTheCursor}">
-                        <FontIcon FontSize="14" Glyph="&#xE81E;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE81E;" />
                     </Button>
                     <Button Grid.Column="6" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Replay_SaveThisPeriodAsAnHTMLReportOrJSONData}">
-                        <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                     </Button>
                 </Grid>
 
@@ -118,7 +118,7 @@
                         <ItemsControl ItemsSource="{x:Bind ViewModel.Moments}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="vm:MomentItemViewModel">
-                                    <Grid ColumnSpacing="10">
+                                    <Grid ColumnSpacing="12">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
@@ -157,7 +157,7 @@
                 <!-- Charts -->
                 <controls:AdaptiveGridPanel Grid.Row="3" MaxColumns="2" MinItemWidth="340">
                     <Border Style="{StaticResource CardStyle}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Common_CPU}" />
                             <controls:TimeSeriesChart
                                 AutomationProperties.Name="{x:Bind l:UiStrings.Replay_CPUUsageReplay}"
@@ -170,7 +170,7 @@
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource CardStyle}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Common_Memory}" />
                             <controls:TimeSeriesChart
                                 AutomationProperties.Name="{x:Bind l:UiStrings.Replay_MemoryUsageReplay}"
@@ -183,7 +183,7 @@
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.HasDisk, Mode=OneWay}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Replay_DiskBusiestVolumeActiveTime}" />
                             <controls:TimeSeriesChart
                                 AutomationProperties.Name="{x:Bind l:UiStrings.Replay_DiskActivityReplay}"
@@ -196,7 +196,7 @@
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.HasNetwork, Mode=OneWay}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Replay_NetworkDownloadAndUpload}" />
                             <controls:TimeSeriesChart
                                 AutomationProperties.Name="{x:Bind l:UiStrings.Replay_NetworkReplay}"
@@ -210,7 +210,7 @@
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.HasGpu, Mode=OneWay}">
-                        <StackPanel Spacing="6">
+                        <StackPanel Spacing="8">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Replay_GPUBusiestAdapter}" />
                             <controls:TimeSeriesChart
                                 AutomationProperties.Name="{x:Bind l:UiStrings.Replay_GPUUsageReplay}"
@@ -226,12 +226,12 @@
 
                 <!-- Values at the cursor -->
                 <Border x:Name="SidePanel" Grid.Row="4" VerticalAlignment="Top" Style="{StaticResource CardStyle}">
-                    <StackPanel Spacing="10">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="2">
                             <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind l:UiStrings.Replay_AtTheCursor}" />
                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.CursorTimeText, Mode=OneWay}" />
                         </StackPanel>
-                        <controls:AdaptiveGridPanel MinItemWidth="140" RowSpacing="10">
+                        <controls:AdaptiveGridPanel MinItemWidth="140" RowSpacing="12">
                             <controls:StatItem Label="{x:Bind l:UiStrings.Common_CPU}" Value="{x:Bind ViewModel.CursorCpu, Mode=OneWay}" />
                             <controls:StatItem Label="{x:Bind l:UiStrings.Common_Memory}" Value="{x:Bind ViewModel.CursorMemory, Mode=OneWay}" />
                             <controls:StatItem Label="{x:Bind l:UiStrings.Replay_Disk}" Value="{x:Bind ViewModel.CursorDisk, Mode=OneWay}" />
@@ -258,7 +258,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Row="5" Grid.ColumnSpan="2" Padding="24" Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+                <Border Grid.Row="5" Grid.ColumnSpan="2" controls:Motion.RevealOnShow="True" Style="{StaticResource EmptyStateCardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind l:UiStrings.Replay_NoMeasurementsForThisPeriodLongerPeriodsUseThe}" TextAlignment="Center" />
                 </Border>
             </Grid>

@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
 
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
@@ -29,7 +29,7 @@
                     AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}"
                     Command="{x:Bind ViewModel.RefreshCommand}"
                     ToolTipService.ToolTip="{x:Bind l:UiStrings.Common_RefreshNow}">
-                    <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
                 </Button>
                 <Button
                     Grid.Column="2"
@@ -37,7 +37,7 @@
                     Command="{x:Bind ViewModel.OpenLargeFilesCommand}"
                     ToolTipService.ToolTip="{x:Bind l:UiStrings.Storage_FindTheFilesThatTakeTheMostSpaceReadOnly}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xE8B7;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE8B7;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Storage_FindLargeFiles}" />
                     </StackPanel>
                 </Button>
@@ -65,17 +65,17 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontSize="28" Foreground="{ThemeResource DiskAccentBrush}" Glyph="&#xEDA2;" />
+                                    <FontIcon Style="{StaticResource FeatureIconStyle}" Foreground="{ThemeResource DiskAccentBrush}" Glyph="&#xEDA2;" />
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Style="{StaticResource CardHeaderTextStyle}" Text="{x:Bind Title, Mode=OneWay}" />
                                         <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind Details, Mode=OneWay}" />
                                     </StackPanel>
                                     <Border
                                         Grid.Column="2"
-                                        Padding="8,2"
+                                        Padding="10,2"
                                         VerticalAlignment="Top"
-                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}"
-                                        CornerRadius="{StaticResource ControlCornerRadius}"
+                                        Background="{ThemeResource SysoraElevatedBrush}"
+                                        CornerRadius="{StaticResource BadgeCornerRadius}"
                                         Visibility="{x:Bind IsSystemDrive, Mode=OneWay}">
                                         <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind l:UiStrings.Storage_Windows}" />
                                     </Border>

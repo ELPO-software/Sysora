@@ -11,7 +11,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -32,29 +32,29 @@
                     SelectedIndex="{x:Bind ViewModel.ViewIndex, Mode=TwoWay}" />
                 <Button Grid.Column="2" VerticalAlignment="Center" Command="{x:Bind ViewModel.CheckNowCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Changes_TakeASnapshotOfThePCNowAndCompareIt}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Changes_CheckNow}" />
                     </StackPanel>
                 </Button>
                 <Button Grid.Column="3" VerticalAlignment="Center" AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.Changes_SaveTheChangesAsAnHTMLReportOrJSONData}">
-                    <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                    <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                 </Button>
             </Grid>
 
             <!-- Since yesterday -->
-            <Border Padding="18" Style="{StaticResource CardStyle}">
+            <Border Padding="{StaticResource CardPadding}" Style="{StaticResource CardStyle}">
                 <StackPanel Spacing="8">
                     <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Common_SINCEYESTERDAY}" />
-                    <StackPanel Orientation="Horizontal" Spacing="18" Visibility="{x:Bind ViewModel.HasSinceCounts, Mode=OneWay}">
-                        <StackPanel Orientation="Horizontal" Spacing="6" Visibility="{x:Bind ViewModel.HasSignificant, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal" Spacing="16" Visibility="{x:Bind ViewModel.HasSinceCounts, Mode=OneWay}">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.HasSignificant, Mode=OneWay}">
                             <controls:StatusIcon BrushKey="StatusCriticalBrush" Glyph="&#xEA39;" GlyphSize="14" />
                             <TextBlock><Run Text="{x:Bind ViewModel.SignificantCount, Mode=OneWay}" /><Run Text="{x:Bind l:UiStrings.Common_Significant}" /></TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="6" Visibility="{x:Bind ViewModel.HasMinor, Mode=OneWay}">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.HasMinor, Mode=OneWay}">
                             <controls:StatusIcon BrushKey="StatusWarningBrush" Glyph="&#xE7BA;" GlyphSize="14" />
                             <TextBlock><Run Text="{x:Bind ViewModel.MinorCount, Mode=OneWay}" /><Run Text="{x:Bind l:UiStrings.Common_Minor}" /></TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Spacing="6" Visibility="{x:Bind ViewModel.IsMostlyUnchanged, Mode=OneWay}">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.IsMostlyUnchanged, Mode=OneWay}">
                             <controls:StatusIcon BrushKey="StatusNormalBrush" Glyph="&#xE73E;" GlyphSize="14" />
                             <TextBlock Text="{x:Bind l:UiStrings.Common_MostOfYourSystemIsUnchanged}" />
                         </StackPanel>
@@ -63,7 +63,7 @@
                     <ItemsControl ItemsSource="{x:Bind ViewModel.SinceItems}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:SinceYesterdayItemViewModel">
-                                <Grid Padding="0,6" ColumnSpacing="12">
+                                <Grid Padding="0,8" ColumnSpacing="12">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
@@ -109,13 +109,13 @@
                                     <DataTemplate x:DataType="vm:ChangeItemViewModel">
                                         <Expander Margin="0,0,0,8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                                             <Expander.Header>
-                                                <Grid Padding="0,10" ColumnSpacing="12">
+                                                <Grid Padding="0,12" ColumnSpacing="12">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
-                                                    <FontIcon Margin="0,2,0,0" VerticalAlignment="Top" FontSize="18" Glyph="{x:Bind Glyph}" />
+                                                    <FontIcon Margin="0,2,0,0" VerticalAlignment="Top" Style="{StaticResource RowIconStyle}" Glyph="{x:Bind Glyph}" />
                                                     <StackPanel Grid.Column="1" Spacing="2">
                                                         <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind Title}" TextWrapping="Wrap" />
                                                         <TextBlock Text="{x:Bind Values}" TextWrapping="Wrap" Visibility="{x:Bind HasValues}" />
@@ -124,7 +124,7 @@
                                                     <controls:LevelBadge Grid.Column="2" VerticalAlignment="Top" BrushKey="{x:Bind ImportanceBrushKey}" Text="{x:Bind ImportanceText}" />
                                                 </Grid>
                                             </Expander.Header>
-                                            <StackPanel Spacing="10">
+                                            <StackPanel Spacing="12">
                                                 <StackPanel Spacing="2">
                                                     <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.Changes_WhatItMeans}" />
                                                     <TextBlock Text="{x:Bind Explanation}" TextWrapping="Wrap" />
@@ -162,9 +162,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Border Padding="24" Style="{StaticResource CardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
+            <Border controls:Motion.RevealOnShow="True" Style="{StaticResource EmptyStateCardStyle}" Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" Spacing="8">
-                    <FontIcon FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Glyph="&#xE8AB;" />
+                    <FontIcon Style="{StaticResource EmptyStateIconStyle}" Glyph="&#xE8AB;" />
                     <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.Changes_NoChangeToShow}" />
                     <TextBlock MaxWidth="640" HorizontalAlignment="Center" Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Note, Mode=OneWay}" TextAlignment="Center" />
                 </StackPanel>

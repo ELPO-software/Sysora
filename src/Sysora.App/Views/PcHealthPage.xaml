@@ -9,7 +9,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="FindingTemplate" x:DataType="vm:FindingItemViewModel">
-            <Grid Padding="0,3" ColumnSpacing="10">
+            <Grid Padding="0,4" ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -26,7 +26,7 @@
         <StackPanel
             MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
-            Spacing="12">
+            Spacing="{StaticResource PageSpacing}">
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -39,20 +39,20 @@
                 </StackPanel>
                 <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Refresh}" Grid.Column="1" VerticalAlignment="Center" Command="{x:Bind ViewModel.RefreshCommand}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE72C;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Common_Refresh}" />
                     </StackPanel>
                 </Button>
                 <Button AutomationProperties.Name="{x:Bind l:UiStrings.Common_Export}" Grid.Column="2" VerticalAlignment="Center" Command="{x:Bind ViewModel.ExportCommand}" ToolTipService.ToolTip="{x:Bind l:UiStrings.PcHealth_SaveThisAnalysisAsAnHTMLReportOrJSONData}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <FontIcon FontSize="14" Glyph="&#xEDE1;" />
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xEDE1;" />
                         <TextBlock Text="{x:Bind l:UiStrings.Common_Export}" />
                     </StackPanel>
                 </Button>
             </Grid>
 
             <!-- Score -->
-            <Border Padding="20" Style="{StaticResource CardStyle}">
+            <Border Padding="24" Style="{StaticResource CardStyle}">
                 <Grid ColumnSpacing="24">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -63,15 +63,16 @@
                             Width="120"
                             Height="120"
                             AutomationProperties.Name="{x:Bind l:UiStrings.PcHealth_PCHealthScore}"
+                            Background="{ThemeResource SysoraTrackBrush}"
                             IsIndeterminate="False"
                             Maximum="100"
                             Value="{x:Bind ViewModel.ScoreValue, Mode=OneWay}" />
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock HorizontalAlignment="Center" FontSize="36" FontWeight="SemiBold" Text="{x:Bind ViewModel.ScoreText, Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource ScoreValueTextStyle}" Text="{x:Bind ViewModel.ScoreText, Mode=OneWay}" />
                             <TextBlock HorizontalAlignment="Center" Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.PcHealth_OutOf100}" />
                         </StackPanel>
                     </Grid>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="8">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <controls:StatusIcon VerticalAlignment="Center" BrushKey="{x:Bind ViewModel.GradeBrushKey, Mode=OneWay}" Glyph="{x:Bind ViewModel.GradeGlyph, Mode=OneWay}" GlyphSize="20" />
                             <TextBlock VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.GradeText, Mode=OneWay}" />
@@ -94,13 +95,13 @@
                             HorizontalContentAlignment="Stretch"
                             IsExpanded="{x:Bind IsExpanded, Mode=TwoWay}">
                             <Expander.Header>
-                                <Grid Padding="0,10" ColumnSpacing="12">
+                                <Grid Padding="0,12" ColumnSpacing="12">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Margin="0,2,0,0" VerticalAlignment="Top" FontSize="18" Glyph="{x:Bind Glyph, Mode=OneWay}" />
+                                    <FontIcon Margin="0,2,0,0" VerticalAlignment="Top" Style="{StaticResource RowIconStyle}" Glyph="{x:Bind Glyph, Mode=OneWay}" />
                                     <StackPanel Grid.Column="1" Spacing="2">
                                         <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind Name, Mode=OneWay}" />
                                         <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind Summary, Mode=OneWay}" />
@@ -111,7 +112,7 @@
                                     </StackPanel>
                                 </Grid>
                             </Expander.Header>
-                            <StackPanel Spacing="10">
+                            <StackPanel Spacing="12">
                                 <StackPanel Spacing="2">
                                     <TextBlock Style="{StaticResource LabelTextStyle}" Text="{x:Bind l:UiStrings.PcHealth_WhyThisImpact}" />
                                     <TextBlock Text="{x:Bind Explanation, Mode=OneWay}" TextWrapping="Wrap" />
@@ -144,13 +145,13 @@
             <!-- Recurring problems -->
             <TextBlock Style="{StaticResource SectionHeaderTextStyle}" Text="{x:Bind l:UiStrings.Common_RecurringProblems}" />
             <Border Style="{StaticResource CardStyle}">
-                <StackPanel Spacing="10">
+                <StackPanel Spacing="12">
                     <TextBlock Text="{x:Bind ViewModel.RecurringSummary, Mode=OneWay}" TextWrapping="Wrap" />
                     <ItemsControl ItemsSource="{x:Bind ViewModel.Recurring}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="vm:RecurringItemViewModel">
-                                <StackPanel Margin="0,6,0,6" Spacing="6">
-                                    <Grid ColumnSpacing="10">
+                                <StackPanel Margin="0,8,0,8" Spacing="8">
+                                    <Grid ColumnSpacing="12">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -179,7 +180,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <FontIcon VerticalAlignment="Center" FontSize="18" Glyph="&#xE9D9;" />
+                    <FontIcon VerticalAlignment="Center" Style="{StaticResource RowIconStyle}" Glyph="&#xE9D9;" />
                     <StackPanel Grid.Column="1">
                         <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.SelfImpactHeadline, Mode=OneWay}" />
                         <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.SelfImpactText, Mode=OneWay}" />
@@ -190,10 +191,10 @@
 
             <!-- Method -->
             <Border Style="{StaticResource CardStyle}">
-                <StackPanel Spacing="6">
+                <StackPanel Spacing="8">
                     <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.PcHealth_HowTheScoreIsComputed}" />
                     <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.Method}" />
-                    <TextBlock Margin="0,6,0,0" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.PcHealth_NotCounted}" />
+                    <TextBlock Margin="0,8,0,0" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind l:UiStrings.PcHealth_NotCounted}" />
                     <ItemsControl ItemsSource="{x:Bind ViewModel.NotAvailable}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="x:String">
