@@ -25,12 +25,19 @@ native WinUI 3 application, in English, French and Spanish: no account, no serve
 
 > Screenshots use demo mode (`--demo`): every value is simulated, and the app shows a "DEMO MODE" badge.
 
+## What's new in 1.5
+
+Sysora has its own look: Sysora blue instead of the Windows accent color, opaque layered surfaces under a tinted Mica,
+clearer titles and values that keep their width as they change. Metrics have new colors that no longer reuse the status
+colors and stay apart with color blindness, and a chart's second line is dashed. Same pages, same features. Details in
+the [release notes](docs/release-notes/v1.5.0.md).
+
 ## What's new in 1.4
 
 A reliability release: no new feature, nine fixes. A metric turned off in Settings no longer stays frozen on screen,
 "yesterday" starts at the right time after a change to or from summer time, the Games, Changes and Replay pages no
 longer report a failed load that did not happen, and the installer closes Sysora before an update in every folder.
-Details in the [release notes](docs/release-notes/v1.4.0.md).
+Details in the [1.4 release notes](docs/release-notes/v1.4.0.md).
 
 ## What's new in 1.3
 
@@ -121,7 +128,7 @@ Full details in the [1.3 release notes](docs/release-notes/v1.3.0.md). Earlier v
   enforces on itself
 - **Notification area**: close to the tray, pause and resume, start with Windows; pending history is saved before the
   PC sleeps and every value is refreshed when it wakes up
-- **Light, dark and system themes** with the Windows 11 look (Mica, Fluent controls)
+- **Light, dark and system themes** in Sysora's own palette, on the Windows 11 look (tinted Mica, Fluent controls)
 - **English, French and Spanish**, with dates and numbers in your Windows regional format
 - **No account, no telemetry**: nothing is ever uploaded
 
