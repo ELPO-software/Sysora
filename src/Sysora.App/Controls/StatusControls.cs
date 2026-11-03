@@ -17,7 +17,9 @@ public sealed partial class HealthGlyph : UserControl
     public HealthGlyph()
     {
         Content = _icon;
+        // A page kept in the navigation cache misses the theme change while it is away: refresh when it comes back.
         ActualThemeChanged += (_, _) => Update();
+        Loaded += (_, _) => Update();
         Update();
     }
 
@@ -65,6 +67,7 @@ public sealed partial class LevelProgressBar : UserControl
         _bar = new UsageBar { Height = 6 };
         Content = _bar;
         ActualThemeChanged += (_, _) => Update();
+        Loaded += (_, _) => Update();
         Update();
     }
 

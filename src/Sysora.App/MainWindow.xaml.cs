@@ -23,9 +23,11 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
 
         // With Mica, the title bar and the pane show the tinted backdrop through a transparent root.
-        if (SysoraBackdrop.IsSupported)
+        if (SysoraBackdrop.IsSupported && SystemBackdrop is SysoraBackdrop backdrop)
         {
             RootGrid.Background = null;
+            RootGrid.Loaded += (_, _) => backdrop.SetTheme(RootGrid.ActualTheme);
+            RootGrid.ActualThemeChanged += (_, _) => backdrop.SetTheme(RootGrid.ActualTheme);
         }
 
         ExtendsContentIntoTitleBar = true;

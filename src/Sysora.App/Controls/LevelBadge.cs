@@ -35,7 +35,9 @@ public sealed partial class LevelBadge : UserControl
         Content = _border;
         HorizontalAlignment = HorizontalAlignment.Left;
         VerticalAlignment = VerticalAlignment.Center;
+        // A page kept in the navigation cache misses the theme change while it is away: refresh when it comes back.
         ActualThemeChanged += (_, _) => Update();
+        Loaded += (_, _) => Update();
         Update();
     }
 
@@ -80,6 +82,7 @@ public sealed partial class StatusIcon : UserControl
         Content = _icon;
         IsTabStop = false;
         ActualThemeChanged += (_, _) => Update();
+        Loaded += (_, _) => Update();
         Update();
     }
 

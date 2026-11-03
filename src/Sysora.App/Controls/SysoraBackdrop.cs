@@ -14,9 +14,19 @@ namespace Sysora.App.Controls;
 public sealed partial class SysoraBackdrop : SystemBackdrop
 {
     private MicaController? _controller;
-    private SystemBackdropConfiguration? _configuration;
+    private ElementTheme _theme = Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light;
 
     public static bool IsSupported => MicaController.IsSupported();
+
+    /// <summary>
+    /// Follows the theme the window content actually uses (Sysora's setting or, for "System", Windows'). Given by the
+    /// window: the backdrop configuration does not report every change of the content's requested theme.
+    /// </summary>
+    public void SetTheme(ElementTheme theme)
+    {
+        _theme = theme;
+        ApplyTint();
+    }
 
     protected override void OnTargetConnected(ICompositionSupportsSystemBackdrop connectedTarget, XamlRoot xamlRoot)
     {
@@ -26,11 +36,10 @@ public sealed partial class SysoraBackdrop : SystemBackdrop
             return;
         }
 
-        // The default configuration follows the theme of the window content (and high contrast, activation).
-        _configuration = GetDefaultSystemBackdropConfiguration(connectedTarget, xamlRoot);
         _controller = new MicaController();
         ApplyTint();
-        _controller.SetSystemBackdropConfiguration(_configuration);
+        // The default configuration still tells Mica about activation and high contrast.
+        _controller.SetSystemBackdropConfiguration(GetDefaultSystemBackdropConfiguration(connectedTarget, xamlRoot));
         _controller.AddSystemBackdropTarget(connectedTarget);
     }
 
@@ -45,34 +54,21 @@ public sealed partial class SysoraBackdrop : SystemBackdrop
         }
     }
 
-    protected override void OnDefaultSystemBackdropConfigurationChanged(ICompositionSupportsSystemBackdrop target, XamlRoot xamlRoot)
-    {
-        base.OnDefaultSystemBackdropConfigurationChanged(target, xamlRoot);
-        ApplyTint();
-    }
-
     private void ApplyTint()
     {
-        if (_controller is null || _configuration is null)
+        if (_controller is null)
         {
             return;
         }
 
-        var theme = _configuration.Theme switch
-        {
-            SystemBackdropTheme.Dark => ElementTheme.Dark,
-            SystemBackdropTheme.Light => ElementTheme.Light,
-            _ => Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light,
-        };
-
-        if (ThemeBrushes.Get("SysoraBackgroundBrush", theme) is SolidColorBrush background)
+        if (ThemeBrushes.Get("SysoraBackgroundBrush", _theme) is SolidColorBrush background)
         {
             _controller.TintColor = background.Color;
             _controller.FallbackColor = background.Color;
         }
 
         // Stronger tint than the system Mica: the pane must read as the same surface as the content area.
-        _controller.TintOpacity = theme == ElementTheme.Dark ? 0.85f : 0.7f;
+        _controller.TintOpacity = _theme == ElementTheme.Dark ? 0.85f : 0.7f;
         _controller.LuminosityOpacity = 1f;
     }
 }
