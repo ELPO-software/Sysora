@@ -11,18 +11,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border
-            Background="{ThemeResource ChartBackgroundBrush}"
-            BorderBrush="{ThemeResource ChartGridBrush}"
-            BorderThickness="1"
-            CornerRadius="{StaticResource ControlCornerRadius}">
+        <!-- No frame around the plot: a recessive grid and a baseline leave the data in front. -->
+        <Border Background="{ThemeResource ChartBackgroundBrush}">
             <Grid
                 x:Name="Plot"
                 Background="Transparent"
                 PointerMoved="OnPlotPointerMoved"
                 PointerPressed="OnPlotPointerPressed"
                 SizeChanged="OnPlotSizeChanged">
-                <!-- Horizontal grid lines at 25%, 50% and 75% of the scale. -->
+                <!-- Dashed grid lines at 25%, 50% and 75% of the scale, solid baseline at 0. -->
                 <Grid IsHitTestVisible="False">
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -30,14 +27,16 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="1" BorderBrush="{ThemeResource ChartGridBrush}" BorderThickness="0,1,0,0" />
-                    <Border Grid.Row="2" BorderBrush="{ThemeResource ChartGridBrush}" BorderThickness="0,1,0,0" />
-                    <Border Grid.Row="3" BorderBrush="{ThemeResource ChartGridBrush}" BorderThickness="0,1,0,0" />
+                    <Line Grid.Row="1" VerticalAlignment="Top" Stretch="Fill" Stroke="{ThemeResource ChartGridBrush}" StrokeDashArray="2,3" StrokeThickness="1" X2="1" />
+                    <Line Grid.Row="2" VerticalAlignment="Top" Stretch="Fill" Stroke="{ThemeResource ChartGridBrush}" StrokeDashArray="2,3" StrokeThickness="1" X2="1" />
+                    <Line Grid.Row="3" VerticalAlignment="Top" Stretch="Fill" Stroke="{ThemeResource ChartGridBrush}" StrokeDashArray="2,3" StrokeThickness="1" X2="1" />
+                    <Border Grid.Row="3" BorderBrush="{ThemeResource ChartGridBrush}" BorderThickness="0,0,0,1" />
                 </Grid>
 
                 <Path x:Name="AreaPath" IsHitTestVisible="False" />
-                <Path x:Name="LinePath" StrokeThickness="1.5" StrokeLineJoin="Round" IsHitTestVisible="False" />
-                <Path x:Name="SecondaryLinePath" StrokeThickness="1.5" StrokeLineJoin="Round" IsHitTestVisible="False" />
+                <Path x:Name="LinePath" StrokeThickness="2" StrokeLineJoin="Round" IsHitTestVisible="False" />
+                <!-- A second series is dashed, so the two lines differ by more than their color. -->
+                <Path x:Name="SecondaryLinePath" StrokeDashArray="3,2" StrokeThickness="2" StrokeLineJoin="Round" IsHitTestVisible="False" />
 
                 <!-- Replay: event markers along the top edge and the cursor (hidden unless set). -->
                 <Path x:Name="MarkerPath" Stroke="{ThemeResource TextFillColorSecondaryBrush}" StrokeThickness="1.5" IsHitTestVisible="False" />
@@ -45,9 +44,10 @@
                     x:Name="CursorLine"
                     Width="2"
                     HorizontalAlignment="Left"
-                    Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                    Fill="{ThemeResource ChartCursorBrush}"
                     IsHitTestVisible="False"
-                    Opacity="0.8"
+                    RadiusX="1"
+                    RadiusY="1"
                     Visibility="Collapsed">
                     <Rectangle.RenderTransform>
                         <TranslateTransform x:Name="CursorTransform" />
@@ -56,7 +56,7 @@
 
                 <TextBlock
                     x:Name="MaximumLabel"
-                    Margin="6,4,0,0"
+                    Margin="4,4,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Style="{StaticResource LabelTextStyle}" />

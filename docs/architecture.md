@@ -364,9 +364,33 @@ atomically (temporary file, then replace). A corrupt file is set aside, and the 
 
 ## Theme
 
-All colors are defined once, in `Themes/Colors.xaml` (light, dark and high-contrast dictionaries).
-Pages use `{ThemeResource}` keys or the standard Fluent brushes. `ThemeService` applies the System,
-Light or Dark preference to the window content and the caption buttons.
+Sysora's design system lives in `src/Sysora.App/Themes`, merged by `App.xaml` in this order (each file uses the ones
+before it):
+
+| File | Contents |
+| --- | --- |
+| `Colors.xaml` | Every color, in light, dark and high-contrast dictionaries: the accent ramp (Sysora blue, in place of the Windows accent), surfaces, metric and status colors, charts, and the keys of the native controls Sysora restyles (navigation, expanders, info bars, flyouts, dialogs) |
+| `Tokens.xaml` | Corner radii, page width and padding, card padding |
+| `Typography.xaml` | Text styles (page, section and card titles, labels, values with tabular digits) and icon sizes |
+| `Controls.xaml` | Radii of the native controls and named variants: `SysoraAccentButtonStyle`, `SysoraSubtleButtonStyle`, `CardButtonStyle`, `PillButtonStyle`, `SysoraContentDialogStyle` |
+| `Styles.xaml` | Cards, table headers, empty states |
+| `Generic.xaml` | Templates of Sysora's own controls (`UsageBar`, `SettingRow`) |
+
+- Pages use these keys or the standard Fluent brushes, never literal colors, font sizes or radii. Spacing follows a 4 px
+  grid (2 px only between a label and its value).
+- Surfaces: background (window, content area) < surface (cards, setting rows) < elevated (table headers, badges, menus). Cards have
+  no shadow. `SysoraBackdrop` tints Mica with the background color; without Mica (Windows 10) the window is solid.
+- Metric colors (CPU, memory, GPU, disk, network) identify a measurement; status colors carry a state and always come with
+  an icon or a label. The two sets never share a color, and the metric colors were checked to stay apart with color
+  blindness. In a chart, a second series is also dashed. The cyan to blue gradient appears only on the navigation
+  selection indicator.
+- Radii: 4 px for small native parts (check boxes, list and menu items), 8 px for buttons, fields and stacked rows, 12 px
+  for cards, 16 px for dialogs and flyouts.
+- Motion: `Motion.RevealOnShow` fades a panel in (200 ms, on the compositor) when it appears; live values are never
+  animated. Nothing is animated when animations are turned off in Windows.
+- `ThemeService` applies the System, Light or Dark preference to the window content and the caption buttons. Brushes that
+  view models choose by key (status, levels) are looked up by `ThemeBrushes`, which reads only top-level merged
+  dictionaries: they must stay in `Colors.xaml`.
 
 ## Logging
 

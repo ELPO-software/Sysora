@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Sysora.App.Controls;
 using Sysora.App.Services;
 using Sysora.App.ViewModels;
 using Sysora.Localization;
@@ -20,6 +21,12 @@ public sealed partial class MainWindow : Window
         ViewModel = viewModel;
         _navigation = navigation;
         InitializeComponent();
+
+        // With Mica, the title bar and the pane show the tinted backdrop through a transparent root.
+        if (SysoraBackdrop.IsSupported)
+        {
+            RootGrid.Background = null;
+        }
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);

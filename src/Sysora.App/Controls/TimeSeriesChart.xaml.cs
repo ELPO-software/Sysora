@@ -171,8 +171,28 @@ public sealed partial class TimeSeriesChart : UserControl
         var chart = (TimeSeriesChart)d;
         chart.LinePath.Stroke = chart.Stroke;
         chart.SecondaryLinePath.Stroke = chart.SecondaryStroke;
-        chart.AreaPath.Fill = chart.Stroke is SolidColorBrush solid ? new SolidColorBrush(solid.Color) { Opacity = 0.18 } : null;
+        chart.AreaPath.Fill = AreaFill(chart.Stroke, 0.24);
     }
+
+    /// <summary>
+    /// Fill under a line: the series color fading toward the baseline, so the line stays in front. Created when the
+    /// color changes (theme switch), never on a data update.
+    /// </summary>
+    internal static Brush? AreaFill(Brush? stroke, double topOpacity) => stroke is SolidColorBrush solid
+        ? new LinearGradientBrush
+        {
+            StartPoint = new Point(0, 0),
+            EndPoint = new Point(0, 1),
+            GradientStops =
+            {
+                new GradientStop { Color = WithOpacity(solid.Color, topOpacity), Offset = 0 },
+                new GradientStop { Color = WithOpacity(solid.Color, 0.02), Offset = 1 },
+            },
+        }
+        : null;
+
+    private static Windows.UI.Color WithOpacity(Windows.UI.Color color, double opacity) =>
+        Microsoft.UI.ColorHelper.FromArgb((byte)Math.Round(opacity * 255), color.R, color.G, color.B);
 
     private void OnPlotSizeChanged(object sender, SizeChangedEventArgs e)
     {

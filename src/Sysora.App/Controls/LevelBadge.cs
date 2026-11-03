@@ -27,11 +27,9 @@ public sealed partial class LevelBadge : UserControl
         _label.Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"];
         _border = new Border
         {
-            Padding = new Thickness(8, 2, 10, 3),
-            CornerRadius = new CornerRadius(10),
+            Padding = new Thickness(8, 2, 10, 2),
+            CornerRadius = (CornerRadius)Application.Current.Resources["BadgeCornerRadius"],
             BorderThickness = new Thickness(1),
-            BorderBrush = (Brush)Application.Current.Resources["CardStrokeColorDefaultBrush"],
-            Background = (Brush)Application.Current.Resources["SubtleFillColorSecondaryBrush"],
             Child = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6, Children = { _dot, _label } },
         };
         Content = _border;
@@ -60,6 +58,8 @@ public sealed partial class LevelBadge : UserControl
     {
         _label.Text = Text;
         _dot.Fill = ThemeBrushes.Get(BrushKey, ActualTheme);
+        _border.Background = ThemeBrushes.Get("SysoraElevatedBrush", ActualTheme);
+        _border.BorderBrush = ThemeBrushes.Get("SysoraDividerBrush", ActualTheme);
         AutomationProperties.SetName(this, Text);
     }
 }

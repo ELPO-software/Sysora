@@ -7,7 +7,7 @@ using Windows.Foundation;
 namespace Sysora.App.Controls;
 
 /// <summary>
-/// Mini-graph for dashboard tiles: one line and a faint area, no axes. Reuses <see cref="TimeSeriesData"/> and
+/// Mini-graph for dashboard tiles: one line and a fading area, no axes. Reuses <see cref="TimeSeriesData"/> and
 /// is reduced to about one point per two pixels, so a tile costs a single small path per update.
 /// </summary>
 public sealed partial class Sparkline : UserControl
@@ -54,7 +54,7 @@ public sealed partial class Sparkline : UserControl
     {
         var sparkline = (Sparkline)d;
         sparkline._line.Stroke = sparkline.Stroke;
-        sparkline._area.Fill = sparkline.Stroke is SolidColorBrush solid ? new SolidColorBrush(solid.Color) { Opacity = 0.15 } : null;
+        sparkline._area.Fill = TimeSeriesChart.AreaFill(sparkline.Stroke, 0.22);
     }
 
     private void Render()

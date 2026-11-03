@@ -17,13 +17,12 @@
 
             <StackPanel Orientation="Horizontal" Spacing="8">
                 <FontIcon
-                    FontSize="16"
                     Foreground="{x:Bind AccentBrush, Mode=OneWay}"
-                    Glyph="{x:Bind Glyph, Mode=OneWay}" />
+                    Glyph="{x:Bind Glyph, Mode=OneWay}"
+                    Style="{StaticResource CardIconStyle}" />
                 <TextBlock
                     VerticalAlignment="Center"
-                    CharacterSpacing="40"
-                    Style="{StaticResource LabelTextStyle}"
+                    Style="{StaticResource EyebrowTextStyle}"
                     Text="{x:Bind Title, Mode=OneWay}" />
             </StackPanel>
 
@@ -52,7 +51,7 @@
                 x:Name="Spark"
                 Grid.Row="4"
                 Height="36"
-                Margin="0,10,0,0"
+                Margin="0,12,0,0"
                 VerticalAlignment="Bottom"
                 Data="{x:Bind Sparkline, Mode=OneWay}"
                 Stroke="{x:Bind AccentBrush, Mode=OneWay}" />

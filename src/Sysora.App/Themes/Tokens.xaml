@@ -1,0 +1,33 @@
+<!--
+    Shapes and spacing shared by every page. Spacing follows a 4 px grid (2 px only between a label and its value);
+    layout values inside pages use multiples of 4 directly, the structural ones below are named.
+-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        Corner radii: the more items stack, the smaller the radius. Small native parts (check boxes, list and menu items,
+        tooltips) keep the Fluent ControlCornerRadius (4 px); menus and drop-downs keep OverlayCornerRadius (8 px), so
+        their inset items stay concentric.
+    -->
+    <CornerRadius x:Key="ButtonCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="RowCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="CardCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="OverlayPanelCornerRadius">16</CornerRadius>
+    <!-- Pills use half their height: WinUI scales oversized radii into ellipses instead of clamping them. -->
+    <CornerRadius x:Key="BadgeCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="PillButtonCornerRadius">26</CornerRadius>
+
+    <!-- Every page shares this width, so titles and cards stay in place when moving between pages. -->
+    <x:Double x:Key="PageMaxWidth">1200</x:Double>
+    <Thickness x:Key="PagePadding">32,24,32,32</Thickness>
+    <!-- Pages whose list fills the window and scrolls by itself (Processes, App Impact, Gaming). -->
+    <Thickness x:Key="FillPagePadding">32,24,32,24</Thickness>
+    <x:Double x:Key="PageSpacing">12</x:Double>
+
+    <Thickness x:Key="CardPadding">16</Thickness>
+    <Thickness x:Key="CompactCardPadding">16,12</Thickness>
+    <Thickness x:Key="EmptyStatePadding">24</Thickness>
+
+</ResourceDictionary>

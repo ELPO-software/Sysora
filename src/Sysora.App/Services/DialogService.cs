@@ -22,7 +22,7 @@ public sealed class DialogService
         var dialog = new ContentDialog
         {
             XamlRoot = root.XamlRoot,
-            Style = (Style)Application.Current.Resources["DefaultContentDialogStyle"],
+            Style = (Style)Application.Current.Resources["SysoraContentDialogStyle"],
             RequestedTheme = root.ActualTheme,
             Title = title,
             Content = new TextBlock { Text = message, TextWrapping = TextWrapping.Wrap },

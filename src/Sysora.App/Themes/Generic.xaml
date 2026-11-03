@@ -8,7 +8,7 @@
         <Setter Property="Height" Value="4" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Foreground" Value="{ThemeResource AccentFillColorDefaultBrush}" />
-        <Setter Property="Background" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
+        <Setter Property="Background" Value="{ThemeResource SysoraTrackBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:UsageBar">
@@ -34,10 +34,10 @@
                     <Border
                         MinHeight="68"
                         Padding="16,12"
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        Background="{ThemeResource SysoraSurfaceBrush}"
+                        BorderBrush="{ThemeResource SysoraCardStrokeBrush}"
                         BorderThickness="1"
-                        CornerRadius="{StaticResource ControlCornerRadius}">
+                        CornerRadius="{StaticResource RowCornerRadius}">
                         <Grid ColumnSpacing="16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -46,8 +46,8 @@
                             </Grid.ColumnDefinitions>
                             <FontIcon
                                 VerticalAlignment="Center"
-                                FontSize="20"
-                                Glyph="{TemplateBinding Glyph}" />
+                                Glyph="{TemplateBinding Glyph}"
+                                Style="{StaticResource RowIconStyle}" />
                             <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
                                 <TextBlock
