@@ -22,10 +22,18 @@ public sealed partial class MainWindow : Window
         _navigation = navigation;
         InitializeComponent();
 
-        // With Mica, the title bar and the pane show the tinted backdrop through a transparent root.
-        if (SysoraBackdrop.IsSupported && SystemBackdrop is SysoraBackdrop backdrop)
+        // With Mica running, the title bar and the pane show the tinted backdrop through a transparent root.
+        if (SystemBackdrop is SysoraBackdrop backdrop)
         {
-            RootGrid.Background = null;
+            if (backdrop.IsActive)
+            {
+                RootGrid.Background = null;
+            }
+            else
+            {
+                backdrop.Activated += (_, _) => RootGrid.Background = null;
+            }
+
             RootGrid.Loaded += (_, _) => backdrop.SetTheme(RootGrid.ActualTheme);
             RootGrid.ActualThemeChanged += (_, _) => backdrop.SetTheme(RootGrid.ActualTheme);
         }

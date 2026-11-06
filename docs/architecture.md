@@ -379,7 +379,7 @@ before it):
 - Pages use these keys or the standard Fluent brushes, never literal colors, font sizes or radii. Spacing follows a 4 px
   grid (2 px only between a label and its value).
 - Surfaces: background (window, content area) < surface (cards, setting rows) < elevated (table headers, badges, menus). Cards have
-  no shadow. `SysoraBackdrop` tints Mica with the background color; without Mica (Windows 10) the window is solid.
+  no shadow. `SysoraBackdrop` tints Mica with the background color; when Mica is not available or cannot start, the window is solid.
 - Metric colors (CPU, memory, GPU, disk, network) identify a measurement; status colors carry a state and always come with
   an icon or a label. The two sets never share a color, and the metric colors were checked to stay apart with color
   blindness. In a chart, a second series is also dashed. The cyan to blue gradient appears only on the navigation

@@ -10,7 +10,7 @@
         <controls:SysoraBackdrop />
     </Window.SystemBackdrop>
 
-    <!-- The solid background is cleared when Mica is available (see MainWindow.xaml.cs). -->
+    <!-- The solid background is cleared once Mica is running (see MainWindow.xaml.cs). -->
     <Grid x:Name="RootGrid" Background="{ThemeResource SysoraBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
