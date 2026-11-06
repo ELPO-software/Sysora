@@ -318,6 +318,6 @@ public sealed partial class LocalizationTests
     [GeneratedRegex(@"[A-Za-z]{3,}")]
     private static partial Regex LetterPattern();
 
-    [GeneratedRegex(@"(?<![\w.:])(Text|AutomationProperties\.Name|Label|Header|ToolTipService\.ToolTip|Content|Description|Hint|Title|Message|PlaceholderText|OnContent|OffContent|PrimaryButtonText|SecondaryButtonText|CloseButtonText)=""(?<value>[^""{][^""]*)""")]
+    [GeneratedRegex(@"(?<![\w.:])(Text|AutomationProperties\.Name|Label|Header|ToolTipService\.ToolTip|Content|Description|Detail|SecondaryDetail|Hint|Title|Message|PlaceholderText|OnContent|OffContent|PrimaryButtonText|SecondaryButtonText|CloseButtonText)=""(?<value>[^""{][^""]*)""")]
     private static partial Regex LiteralTextAttribute();
 }

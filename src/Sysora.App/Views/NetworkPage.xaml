@@ -51,13 +51,13 @@
                 <controls:MetricCard
                     Title="{x:Bind l:UiStrings.Network_DownloadHeader}"
                     AccentBrush="{ThemeResource NetworkAccentBrush}"
-                    Detail="Receive rate"
+                    Detail="{x:Bind l:UiStrings.Network_ReceiveRate}"
                     Glyph="&#xE896;"
                     Value="{x:Bind ViewModel.Download, Mode=OneWay}" />
                 <controls:MetricCard
                     Title="{x:Bind l:UiStrings.Network_UploadHeader}"
                     AccentBrush="{ThemeResource NetworkSecondaryAccentBrush}"
-                    Detail="Send rate"
+                    Detail="{x:Bind l:UiStrings.Network_SendRate}"
                     Glyph="&#xE898;"
                     Value="{x:Bind ViewModel.Upload, Mode=OneWay}" />
                 <Border Style="{StaticResource CardStyle}">

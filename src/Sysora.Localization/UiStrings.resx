@@ -675,6 +675,12 @@
   <data name="Network_Download" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="Network_ReceiveRate" xml:space="preserve">
+    <value>Receive rate</value>
+  </data>
+  <data name="Network_SendRate" xml:space="preserve">
+    <value>Send rate</value>
+  </data>
   <data name="Network_Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
